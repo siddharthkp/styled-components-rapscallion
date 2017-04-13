@@ -4,15 +4,15 @@ import styled from 'styled-components'
 import styleSheet from 'styled-components/lib/models/StyleSheet'
 import express from 'express'
 
+/* Simple styled component */
+const Red = styled.div`
+  color: red;
+`
+
 /* Define the express server */
 
 const app = express()
 app.get('/', (req, res) => {
-
-  /* Simple styled component */
-  const Red = styled.div`
-    color: red;
-  `
 
   /* Using rapscallion's render component, this outputs a Renderer */
   const componentRenderer = render(<Red>red text?</Red>)
