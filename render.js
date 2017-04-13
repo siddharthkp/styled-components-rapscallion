@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   `
 
   /* Using rapscallion's render component, this outputs a Renderer */
-  const component = render(<Red>red text?</Red>)
+  const componentRenderer = render(<Red>red text?</Red>)
 
   /* Get styles from styleSheet */
   const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
       <head>
         <style>${styles}</style>
       </head>
-      <body><div id="root">${component}</div></body>
+      <body><div id="root">${componentRenderer}</div></body>
     </html>
   `
 
