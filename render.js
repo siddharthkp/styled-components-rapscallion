@@ -4,26 +4,24 @@ import styled from 'styled-components'
 import styleSheet from 'styled-components/lib/models/StyleSheet'
 import express from 'express'
 
+/* Simple styled component */
+const Red = styled.div`
+  color: red;
+`
+
 /* Define the express server */
 
 const app = express()
 app.get('/', (req, res) => {
-
-  /* Simple styled component */
-  const Red = styled.div`
-    color: red;
-  `
-
   /* Using rapscallion's render component, this outputs a Renderer */
   const componentRenderer = render(<Red>red text?</Red>)
 
   /* Get styles from styleSheet */
   const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
   /*
-    Output is an empty class: .sc-bdVaJa {}
+    The first output is an empty class: .sc-bdVaJa {}
 
-    Works when using renderToString from react-dom/server,
-    but not with rapscallion's render
+    After a refresh, style changes to: .sc-bdVaJa {}.rOCEJ {color: red;}
   */
 
 
@@ -39,7 +37,9 @@ app.get('/', (req, res) => {
   `
 
   /* Stream and pipe out */
-  responseRenderer.toStream().pipe(res)
+  responseRenderer.toPromise()
+  .then(htmlString => res.end(htmlString));
+
 })
 
 app.listen(3000, () => console.log('Listening on localhost:3000'))
