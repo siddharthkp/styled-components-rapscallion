@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 
   /* Create the html template, fill with styles and component */
-  const response = template`
+  const responseRenderer = template`
     <!DOCTYPE html>
     <html>
       <head>
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
   `
 
   /* Stream and pipe out */
-  response.toStream().pipe(res)
+  responseRenderer.toStream().pipe(res)
 })
 
 app.listen(3000, () => console.log('Listening on localhost:3000'))
